@@ -37,14 +37,18 @@ class dll{
 			if(pos==1){
 				Node *temp = head;
 				head = temp->right;
+				head->left = NULL;
 				free(temp);
 			}
 			else{
 				Node *tempHead = head;
-				while(tempHead->right!=NULL){
+				int num = 1;
+				while(tempHead->right!=NULL&&num<pos){
 					tempHead = tempHead->right;
+					num++;
 				}
-				tempHead->left->right = NULL;
+				tempHead->left->right = tempHead->right;
+				tempHead->right->left = tempHead->left;
 				free(tempHead);
 				
 			}
@@ -64,6 +68,8 @@ int main(){
 	a.insertion(8,2);
 	a.insertion(3,3);
 	a.insertion(2,4);
+	a.print();
+	a.del(3);
 	a.print();
 	
 }
