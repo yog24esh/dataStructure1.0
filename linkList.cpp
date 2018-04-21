@@ -23,27 +23,34 @@ class ll{
 					head = temp;
 				}
 				else{
-				while(r->link!=NULL){
+					int num = 1;
+					Node *prev;
+				while(r->link!=NULL&&num<pos){
+				prev = r;
 				r = r->link;
+				num++;
 			}
-			r->link = temp;
+			temp->link = r->link;
 			temp->data = x;
-			temp->link = NULL;
+			r->link = temp;
 		}
 		}
 		void del(int pos){
 			Node *temp = head;
-			if(temp->link==NULL){
+			if(temp->link==NULL||pos==1){
 				free(temp);
 				head = NULL;
 			}
 			else{
 				Node *prev;
-			while(temp->link!=NULL){
+				int num = 1;
+			while(temp->link!=NULL&&num<pos){
 				prev = temp;
 				temp  = temp->link;
+				num++;
 			}
-			prev->link = NULL;
+			
+			prev->link = temp->link;
 			free(temp);
 			
 		}}
@@ -61,8 +68,12 @@ int main(){
 	a.insert(5,1);
 	a.insert(2,2);
 	a.insert(4,3);
+	a.insert(5,4);
 	a.print();
-	a.del(3);
+//	a.del(2);
+//	a.print();
+	a.insert(24,3);
+	a.insert(0,2);
 	a.print();
 return 0;
 }
